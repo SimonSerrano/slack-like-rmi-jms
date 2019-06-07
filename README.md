@@ -1,10 +1,10 @@
 # Slack Like RMI/JMS
 
-##AUTHOR :
+## AUTHOR :
 
   * Simon Serrano ([mail](mailto:simon.serrano@hotmail.fr))
 
-##DESCRIPTION
+## DESCRIPTION
 
 Slack like console application in Java RMI and JMS. Main features are :
   * Login (simulated)
@@ -14,13 +14,13 @@ Slack like console application in Java RMI and JMS. Main features are :
   
 Careful, it is not a Maven Project.
  
-##DEPENDENCIES
+## DEPENDENCIES
 
   * [JMS](https://docs.oracle.com/javaee/7/api/javax/jms/package-summary.html)
   * [ActiveMQ](https://activemq.apache.org/using-activemq)
 
   
-##ARCHITECTURE
+## ARCHITECTURE
 
 The GitHub is divided in two different modules. One is the server, the other is the client.
  The server hosts the broker for JMS as well as the RMI backend where the objects are located.
@@ -29,51 +29,51 @@ The GitHub is divided in two different modules. One is the server, the other is 
  subscribers (actual users) on their own topic for the group. Thus, every user have access to the messages
  in their subscribed groups as long as the server keeps running.
  
-##GETTING STARTED
+## GETTING STARTED
 
-###If you use intellij or eclipse
+### If you use intellij or eclipse
 Clone the project with your IDE and add the dependencies to the modules, and just run each main class.
 
-###Otherwise...
+### Otherwise...
 Add the .jar defined by the dependencies, to the classpath, compile with `javac` and run with `java`.
 
 
  
-##USAGE
+## USAGE
 
 Here are the commands from the client console :
 
 
 ___
-!connect 
+`!connect` 
   
 Connect to the server with a username and a password.
 ___
-!groups
+`!groups`
 
 List all the available groups.
 ___
-!subscribe [group-name]
+`!subscribe [group-name]`
 
 Subscribe to a group.
 ___
-!listen [group-name]
+`!listen [group-name]`
 
 Listen to a group conversation.
 ___
-!quiet [group-name]
+`!quiet [group-name]`
 
 Stop listenning to a group conversation.
 ___
-!publish [group-name] [...message]
+`!publish [group-name] [...message]`
 
 Publish a message to a group.
 ___
-!help
+`!help`
 
 Show the help menu.
 ___
-!exit
+`!exit`
 
 Exit the program.
 ___
