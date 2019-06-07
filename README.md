@@ -58,7 +58,7 @@ Here are the commands from the client console :
 ___
 `!connect` 
   
-Connect to the server with a username and a password.
+Connect to the server with a username and a password (The password can be anything currently).
 ___
 `!groups`
 
