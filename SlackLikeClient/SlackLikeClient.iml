@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://D:/Java/glassfish5/mq/lib/imq.jar!/" />
+          <root url="jar://D:/Java/glassfish5/mq/lib/jms.jar!/" />
+          <root url="jar://D:/Java/glassfish5/mq/lib/imqxm.jar!/" />
+          <root url="jar://D:/Java/glassfish5/mq/lib/jhall.jar!/" />
+          <root url="jar://D:/Java/glassfish5/mq/lib/imqjmx.jar!/" />
+          <root url="jar://D:/Java/glassfish5/mq/lib/imqums.war!/" />
+          <root url="jar://D:/Java/glassfish5/mq/lib/hk2-api.jar!/" />
+          <root url="jar://D:/Java/glassfish5/mq/lib/imqhttp.war!/" />
+          <root url="jar://D:/Java/glassfish5/mq/lib/imqutil.jar!/" />
+          <root url="jar://D:/Java/glassfish5/mq/lib/imqadmin.jar!/" />
+          <root url="jar://D:/Java/glassfish5/mq/lib/imqhttps.war!/" />
+          <root url="jar://D:/Java/glassfish5/mq/lib/imqstomp.jar!/" />
+          <root url="jar://D:/Java/glassfish5/mq/lib/jaxm-api.jar!/" />
+          <root url="jar://D:/Java/glassfish5/mq/lib/fscontext.jar!/" />
+          <root url="jar://D:/Java/glassfish5/mq/lib/imqbroker.jar!/" />
+          <root url="jar://D:/Java/glassfish5/mq/lib/imqservlet.jar!/" />
+          <root url="jar://D:/Java/glassfish5/mq/lib/javax.json.jar!/" />
+          <root url="jar://D:/Java/glassfish5/mq/lib/grizzly-http.jar!/" />
+          <root url="jar://D:/Java/glassfish5/mq/lib/imqbridgemgr.jar!/" />
+          <root url="jar://D:/Java/glassfish5/mq/lib/imqjmsbridge.jar!/" />
+          <root url="jar://D:/Java/glassfish5/mq/lib/glassfish-api.jar!/" />
+          <root url="jar://D:/Java/glassfish5/mq/lib/grizzly-portunif.jar!/" />
+          <root url="jar://D:/Java/glassfish5/mq/lib/grizzly-framework.jar!/" />
+          <root url="jar://D:/Java/glassfish5/mq/lib/javax.servlet-api.jar!/" />
+          <root url="jar://D:/Java/glassfish5/mq/lib/grizzly-websockets.jar!/" />
+          <root url="jar://D:/Java/glassfish5/mq/lib/grizzly-http-server.jar!/" />
+          <root url="jar://D:/Java/glassfish5/mq/lib/grizzly-http-servlet.jar!/" />
+          <root url="jar://D:/Java/glassfish5/mq/lib/javax.transaction-api.jar!/" />
+          <root url="jar://D:/Java/glassfish5/mq/lib/tyrus-standalone-client.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://D:/Java/apache-activemq-5.15.9/lib/hawtbuf-1.11.jar!/" />
+          <root url="jar://D:/Java/apache-activemq-5.15.9/lib/slf4j-api-1.7.25.jar!/" />
+          <root url="jar://D:/Java/apache-activemq-5.15.9/lib/activemq-web-5.15.9.jar!/" />
+          <root url="jar://D:/Java/apache-activemq-5.15.9/lib/activemq-jaas-5.15.9.jar!/" />
+          <root url="jar://D:/Java/apache-activemq-5.15.9/lib/activemq-protobuf-1.1.jar!/" />
+          <root url="jar://D:/Java/apache-activemq-5.15.9/lib/jcl-over-slf4j-1.7.25.jar!/" />
+          <root url="jar://D:/Java/apache-activemq-5.15.9/lib/activemq-broker-5.15.9.jar!/" />
+          <root url="jar://D:/Java/apache-activemq-5.15.9/lib/activemq-client-5.15.9.jar!/" />
+          <root url="jar://D:/Java/apache-activemq-5.15.9/lib/activemq-spring-5.15.9.jar!/" />
+          <root url="jar://D:/Java/apache-activemq-5.15.9/lib/activemq-console-5.15.9.jar!/" />
+          <root url="jar://D:/Java/apache-activemq-5.15.9/lib/geronimo-jms_1.1_spec-1.1.1.jar!/" />
+          <root url="jar://D:/Java/apache-activemq-5.15.9/lib/activemq-kahadb-store-5.15.9.jar!/" />
+          <root url="jar://D:/Java/apache-activemq-5.15.9/lib/geronimo-jta_1.0.1B_spec-1.0.1.jar!/" />
+          <root url="jar://D:/Java/apache-activemq-5.15.9/lib/activemq-openwire-legacy-5.15.9.jar!/" />
+          <root url="jar://D:/Java/apache-activemq-5.15.9/lib/geronimo-j2ee-management_1.1_spec-1.0.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://D:/Java/slf4j-1.7.26/slf4j-simple-1.7.26.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://D:/Java/jackson" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://D:/Java/jackson" recursive="false" />
+      </library>
+    </orderEntry>
+  </component>
+</module>
