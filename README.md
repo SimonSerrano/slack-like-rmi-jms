@@ -45,35 +45,35 @@ Here are the commands from the client console :
 
 
 ___
-!connect 
+`!connect` 
   
 Connect to the server with a username and a password.
 ___
-!groups
+`!groups`
 
 List all the available groups.
 ___
-!subscribe [group-name]
+`!subscribe [group-name]`
 
 Subscribe to a group.
 ___
-!listen [group-name]
+`!listen [group-name]`
 
 Listen to a group conversation.
 ___
-!quiet [group-name]
+`!quiet [group-name]`
 
 Stop listenning to a group conversation.
 ___
-!publish [group-name] [...message]
+`!publish [group-name] [...message]`
 
 Publish a message to a group.
 ___
-!help
+`!help`
 
 Show the help menu.
 ___
-!exit
+`!exit`
 
 Exit the program.
 ___
