@@ -39,7 +39,7 @@ Add the .jar defined by the dependencies, to the classpath, compile with `javac`
 
 
  
-##USAGE
+## USAGE
 
 Here are the commands from the client console :
 
