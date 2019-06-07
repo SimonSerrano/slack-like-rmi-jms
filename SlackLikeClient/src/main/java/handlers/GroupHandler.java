@@ -69,7 +69,7 @@ class GroupHandler {
                 group.ifPresent((group1 -> {
                     try {
                         subscribe(group1);
-                    } catch (RemoteException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }));
@@ -164,7 +164,7 @@ class GroupHandler {
         }
     }
 
-    private void subscribe(IGroup group) throws RemoteException {
+    private void subscribe(IGroup group) throws RemoteException, JMSException {
         if(group.getSubscribers().contains(user)){
             System.out.println("User is already subscribed to this group");
         }

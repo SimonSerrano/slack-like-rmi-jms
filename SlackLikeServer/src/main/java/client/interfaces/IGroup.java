@@ -1,5 +1,6 @@
 package client.interfaces;
 
+import javax.jms.JMSException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.Vector;
@@ -28,7 +29,7 @@ public interface IGroup extends Remote {
      * @param user user to subscribe to a group.
      * @throws RemoteException if an RMI exception occurs.
      */
-    void subscribe(ISlackLikeUser user) throws RemoteException;
+    void subscribe(ISlackLikeUser user) throws RemoteException, JMSException;
 
     /**
      * Unsubscribe a user to the group.

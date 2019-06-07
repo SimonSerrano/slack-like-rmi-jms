@@ -17,6 +17,7 @@ public class Group extends UnicastRemoteObject implements IGroup, MessageListene
     private final String name;
     private final Vector<ISlackLikeUser> subscribers;
     private Connection connection;
+    private Session subSession;
 
     private final long MESSAGE_LIFESPAN = 180000;
 
@@ -32,7 +33,7 @@ public class Group extends UnicastRemoteObject implements IGroup, MessageListene
         connection = connectionFactory.createConnection();
         connection.setClientID(this.name);
         connection.start();
-        Session subSession = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+        subSession = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
         Topic topic = subSession.createTopic(this.name);
         MessageConsumer consumer = subSession.createDurableSubscriber(topic, this.name);
         consumer.setMessageListener(this);
@@ -60,8 +61,10 @@ public class Group extends UnicastRemoteObject implements IGroup, MessageListene
      *{@inheritDoc}
      */
     @Override
-    public void subscribe(ISlackLikeUser user) throws RemoteException {
+    public void subscribe(ISlackLikeUser user) throws RemoteException, JMSException {
         if (!subscribers.contains(user)) {
+            Topic topic = subSession.createTopic(name+user.getName());
+            subSession.createDurableSubscriber(topic, user.getName());
             subscribers.add(user);
             System.out.println("Successfully subscribed " + user.getName() + " to group " + name);
         }else {
