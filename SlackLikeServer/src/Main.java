@@ -12,7 +12,6 @@ class Main {
         BrokerService broker = BrokerFactory.createBroker(new URI(
               "broker:(tcp://localhost:61616)"));
         broker.start();
-//        java.rmi.registry.LocateRegistry.createRegistry(1099);
 
         ISlackLikeServer server =new SlackLikeServer();
         Naming.rebind("rmi://127.0.0.1/slacklike", server);

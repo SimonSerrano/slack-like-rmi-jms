@@ -11,12 +11,19 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.NoSuchElementException;
 import java.util.Vector;
 
+/**
+ * Implementation of the server, used to manage a connection.
+ */
 public class SlackLikeServer extends UnicastRemoteObject implements ISlackLikeServer {
 
 
     private final Vector<ISlackLikeUser> clients;
     private final Vector<IGroup> groups;
 
+    /**
+     * Default constructor which build a list of clients and groups.
+     * @throws RemoteException if an RMI exception occurs.
+     */
     public SlackLikeServer() throws RemoteException {
         clients = new ClientMock().buildClientMocks();
         groups = new GroupMock().buildGroupMocks(clients);
@@ -33,6 +40,9 @@ public class SlackLikeServer extends UnicastRemoteObject implements ISlackLikeSe
         throw new NoSuchElementException();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public ISlackLikeUser login(String username, byte[] password) throws RemoteException {
             ISlackLikeUser client = matchUsernameAndPassword(username,password);
@@ -42,11 +52,18 @@ public class SlackLikeServer extends UnicastRemoteObject implements ISlackLikeSe
 
 
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Vector<IGroup> getGroups() {
         return groups;
     }
 
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public IGroup getGroupByName(String name) throws RemoteException {
         for (IGroup group : groups) {

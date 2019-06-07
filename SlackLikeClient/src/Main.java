@@ -1,4 +1,4 @@
-import handlers.CommandHandler;
+import handlers.ConnectionHandler;
 
 class Main {
 
@@ -7,7 +7,7 @@ class Main {
     /** @noinspection InfiniteLoopStatement*/
     public static void main(String [] args){
         System.out.println("Welcome to SlackLike !");
-        CommandHandler handler = new CommandHandler();
+        ConnectionHandler handler = new ConnectionHandler();
         while(true){
            handler.handle();
         }

@@ -12,6 +12,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
+/**
+ * Class used to handle all the group's command summed up in {@link commands.ECommand} enum.
+ */
 class GroupHandler {
 
     private final ISlackLikeUser user;
@@ -22,8 +25,14 @@ class GroupHandler {
     private MessageConsumer consumer;
     private List<IGroup> groups;
 
-
-    public GroupHandler(ISlackLikeUser user, ISlackLikeServer server, Connection connection) throws JMSException {
+    /**
+     * Constructor for the group handler after a connection happenned.
+     * @param user The current user.
+     * @param server The server reference.
+     * @param connection The connection to the JMS Provider.
+     * @throws JMSException if the JMS connection throws an exception.
+     */
+    GroupHandler(ISlackLikeUser user, ISlackLikeServer server, Connection connection) throws JMSException {
         this.user = user;
         this.server = server;
         this.scanner = new Scanner(System.in);
@@ -32,7 +41,11 @@ class GroupHandler {
     }
 
 
-    public void handle() {
+    /**
+     * Handles all the groups commands.
+     * @throws IllegalArgumentException if a bad argument usage occurs.
+     */
+    void handle() throws IllegalArgumentException {
         String[] command = scanner.nextLine().split(" ");
         if(command[0].equals(ECommand.GROUPS.getCommandString())){
             try {
@@ -56,7 +69,7 @@ class GroupHandler {
                 group.ifPresent((group1 -> {
                     try {
                         subscribe(group1);
-                    } catch (RemoteException | JMSException e) {
+                    } catch (RemoteException e) {
                         e.printStackTrace();
                     }
                 }));
@@ -130,9 +143,13 @@ class GroupHandler {
         if(subSession != null){
             consumer.close();
         }
+        System.out.println("All the groups are now quiet");
     }
 
     private void publish(String message, IGroup group) throws RemoteException, JMSException {
+        if(consumer == null){
+            System.out.println("You are publishing in "+ group.getName() + " while not listening to any group.");
+        }
         if(group.getSubscribers().contains(user)) {
             Session pubSession = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
             Topic topic = pubSession.createTopic(group.getName());
@@ -143,22 +160,30 @@ class GroupHandler {
             producer.send(textMessage, DeliveryMode.PERSISTENT, Message.DEFAULT_PRIORITY, MESSAGE_LIFESPAN);
             pubSession.close();
         }else {
-            System.out.println("You need to be subscribed in order to publish");
+            System.out.println("You need to be subscribed to " + group.getName() + " in order to publish");
         }
     }
 
     private void subscribe(IGroup group) throws RemoteException {
+        if(group.getSubscribers().contains(user)){
+            System.out.println("User is already subscribed to this group");
+        }
         group.subscribe(user);
         System.out.println("Successfully subscribed user " + user.getName() + " to " + group.getName());
     }
 
 
     private void listen(IGroup group) throws JMSException, RemoteException {
+        if(consumer != null){
+            consumer.close();
+            System.out.println("Stopped listening on previous group");
+        }
         if(group.getSubscribers().contains(user)) {
             Topic topic = subSession.createTopic(group.getName()+user.getName());
             consumer = subSession.createDurableSubscriber(topic, user.getName());
             consumer.setMessageListener(new GroupListener());
             connection.start();
+            System.out.println("Now listening to" + group.getName());
         }else {
             System.out.println("You need to be subscribed to a group in order to listen to it");
         }

@@ -10,7 +10,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.Vector;
 
 /**
- * Represent the implementation of a group containing subscribers, which are SlackLikeUser, and the group has a name
+ * Represent the implementation of a group containing subscribers, which are SlackLikeUser, and the group has a name.
  */
 public class Group extends UnicastRemoteObject implements IGroup, MessageListener {
 
@@ -21,9 +21,9 @@ public class Group extends UnicastRemoteObject implements IGroup, MessageListene
     private final long MESSAGE_LIFESPAN = 180000;
 
     /**
-     * Constructor of a group with a name
-     * @param name the name of the group
-     * @throws RemoteException if an exception occurs
+     * Constructor of a group with a name.
+     * @param name the name of the group.
+     * @throws RemoteException if an exception occurs.
      */
     public Group(String name) throws RemoteException, JMSException {
         this.name = name;
@@ -84,6 +84,10 @@ public class Group extends UnicastRemoteObject implements IGroup, MessageListene
     }
 
 
+    /**
+     * {@inheritDoc}
+     * Transfers the message from the group's topic to each subscribers to a different topic.
+     */
     @Override
     public void onMessage(Message message) {
         Session pubSession;

@@ -12,15 +12,20 @@ import java.security.MessageDigest;
 import java.security.SecureRandom;
 import java.util.Scanner;
 
-public class CommandHandler {
+/**
+ * Handles all the commands before the connection.
+ */
+public class ConnectionHandler {
 
     private final Scanner console;
 
-    public CommandHandler() {
+    public ConnectionHandler() {
         console = new Scanner(System.in);
     }
 
-    /** @noinspection InfiniteLoopStatement*/
+    /**
+     * Handles the connection process.
+     @noinspection InfiniteLoopStatement*/
     public void handle(){
         String[] line = console.nextLine().split(" ");
         if(line[0].equals(ECommand.CONNECT.getCommandString())){
@@ -45,7 +50,11 @@ public class CommandHandler {
                 connection.start();
                 GroupHandler handler = new GroupHandler(user, server, connection);
                 while (true){
-                    handler.handle();
+                    try {
+                        handler.handle();
+                    }catch (IllegalArgumentException e){
+                        System.out.println("Wrong use of command, type !help to show help menu");
+                    }
                 }
             } catch (Exception e) {
                 e.printStackTrace();

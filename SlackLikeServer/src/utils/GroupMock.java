@@ -10,13 +10,13 @@ import java.util.Random;
 import java.util.Vector;
 
 /**
- * Represent the group mock utility class
+ * Represent the group mock utility class.
  */
 public class GroupMock {
 
     /**
-     * Build the groups mock for the server and randomly adds subscribers
-     * @return the vector of groups
+     * Build the groups mock for the server and randomly adds subscribers.
+     * @return the vector of groups.
      */
     public Vector<IGroup> buildGroupMocks(Vector<ISlackLikeUser> clients){
         Vector<IGroup> groups = new Vector<>();
