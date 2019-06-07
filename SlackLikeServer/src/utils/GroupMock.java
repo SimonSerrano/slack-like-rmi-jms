@@ -35,7 +35,7 @@ public class GroupMock {
         return groups;
     }
 
-    private void randomlySubscribe(Vector<ISlackLikeUser> clients, IGroup group) throws RemoteException, JMSException {
+    private void randomlySubscribe(Vector<ISlackLikeUser> clients, IGroup group) throws RemoteException {
         Random random = new Random();
         int numberOfSubs = random.nextInt(clients.size());
         for (int i = 0; i < numberOfSubs; i++) {

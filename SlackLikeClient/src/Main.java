@@ -1,9 +1,10 @@
 import handlers.CommandHandler;
 
-public class Main {
+class Main {
 
 
 
+    /** @noinspection InfiniteLoopStatement*/
     public static void main(String [] args){
         System.out.println("Welcome to SlackLike !");
         CommandHandler handler = new CommandHandler();

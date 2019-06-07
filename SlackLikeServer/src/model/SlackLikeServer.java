@@ -14,8 +14,8 @@ import java.util.Vector;
 public class SlackLikeServer extends UnicastRemoteObject implements ISlackLikeServer {
 
 
-    private Vector<ISlackLikeUser> clients;
-    private Vector<IGroup> groups;
+    private final Vector<ISlackLikeUser> clients;
+    private final Vector<IGroup> groups;
 
     public SlackLikeServer() throws RemoteException {
         clients = new ClientMock().buildClientMocks();

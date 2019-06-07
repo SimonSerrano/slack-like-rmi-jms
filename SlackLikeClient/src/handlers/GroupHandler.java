@@ -1,31 +1,29 @@
 package handlers;
 
-import commands.ECommand;
 import client.interfaces.IGroup;
 import client.interfaces.ISlackLikeServer;
 import client.interfaces.ISlackLikeUser;
+import commands.ECommand;
 import listeners.GroupListener;
 
 import javax.jms.*;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
-public class GroupHandler {
+class GroupHandler {
 
-    private ISlackLikeUser user;
-    private ISlackLikeServer server;
-    private Scanner scanner;
-    private Connection connection;
+    private final ISlackLikeUser user;
+    private final ISlackLikeServer server;
+    private final Scanner scanner;
+    private final Connection connection;
     private Session subSession;
+    private MessageConsumer consumer;
     private List<IGroup> groups;
 
-    private final long MESSAGE_LIFESPAN = 180000;
 
-
-    public GroupHandler(ISlackLikeUser user, ISlackLikeServer server, Connection connection) throws RemoteException, JMSException {
+    public GroupHandler(ISlackLikeUser user, ISlackLikeServer server, Connection connection) throws JMSException {
         this.user = user;
         this.server = server;
         this.scanner = new Scanner(System.in);
@@ -130,7 +128,7 @@ public class GroupHandler {
 
     private void quiet() throws JMSException {
         if(subSession != null){
-            subSession.close();
+            consumer.close();
         }
     }
 
@@ -141,6 +139,7 @@ public class GroupHandler {
             MessageProducer producer = pubSession.createProducer(topic);
             TextMessage textMessage = pubSession.createTextMessage();
             textMessage.setText("#" + group.getName() + " - " + user.getName() + ": " + message);
+            long MESSAGE_LIFESPAN = 180000;
             producer.send(textMessage, DeliveryMode.PERSISTENT, Message.DEFAULT_PRIORITY, MESSAGE_LIFESPAN);
             pubSession.close();
         }else {
@@ -148,7 +147,7 @@ public class GroupHandler {
         }
     }
 
-    private void subscribe(IGroup group) throws RemoteException, JMSException {
+    private void subscribe(IGroup group) throws RemoteException {
         group.subscribe(user);
         System.out.println("Successfully subscribed user " + user.getName() + " to " + group.getName());
     }
@@ -157,7 +156,7 @@ public class GroupHandler {
     private void listen(IGroup group) throws JMSException, RemoteException {
         if(group.getSubscribers().contains(user)) {
             Topic topic = subSession.createTopic(group.getName()+user.getName());
-            MessageConsumer consumer = subSession.createDurableSubscriber(topic, user.getName());
+            consumer = subSession.createDurableSubscriber(topic, user.getName());
             consumer.setMessageListener(new GroupListener());
             connection.start();
         }else {

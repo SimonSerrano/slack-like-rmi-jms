@@ -1,32 +1,26 @@
 package handlers;
 
-import commands.ECommand;
 import client.interfaces.ISlackLikeServer;
 import client.interfaces.ISlackLikeUser;
+import commands.ECommand;
 import org.apache.activemq.ActiveMQConnectionFactory;
 
 import javax.jms.Connection;
-import javax.jms.JMSException;
-import java.net.MalformedURLException;
 import java.nio.charset.StandardCharsets;
 import java.rmi.Naming;
-import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Scanner;
 
 public class CommandHandler {
 
-    private Scanner console;
-    private boolean connected;
+    private final Scanner console;
 
     public CommandHandler() {
         console = new Scanner(System.in);
-        connected = false;
     }
 
+    /** @noinspection InfiniteLoopStatement*/
     public void handle(){
         String[] line = console.nextLine().split(" ");
         if(line[0].equals(ECommand.CONNECT.getCommandString())){

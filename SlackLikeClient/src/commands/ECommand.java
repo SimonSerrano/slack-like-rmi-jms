@@ -11,8 +11,8 @@ public enum ECommand {
     HELP("!help", "Show this message"),
     EXIT("!exit", "Exit the program");
 
-    private String commandString;
-    private String commandHelper;
+    private final String commandString;
+    private final String commandHelper;
 
     ECommand(String commandString, String commandHelper) {
         this.commandString = commandString;

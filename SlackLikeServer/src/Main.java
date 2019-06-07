@@ -3,12 +3,10 @@ import model.SlackLikeServer;
 import org.apache.activemq.broker.BrokerFactory;
 import org.apache.activemq.broker.BrokerService;
 
-import java.net.MalformedURLException;
 import java.net.URI;
 import java.rmi.Naming;
-import java.rmi.RemoteException;
 
-public class Main {
+class Main {
     public static void main(String[] args) throws Exception {
 
         BrokerService broker = BrokerFactory.createBroker(new URI(

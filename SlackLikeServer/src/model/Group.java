@@ -14,8 +14,8 @@ import java.util.Vector;
  */
 public class Group extends UnicastRemoteObject implements IGroup, MessageListener {
 
-    private String name;
-    private Vector<ISlackLikeUser> subscribers;
+    private final String name;
+    private final Vector<ISlackLikeUser> subscribers;
     private Connection connection;
 
     private final long MESSAGE_LIFESPAN = 180000;
@@ -50,7 +50,7 @@ public class Group extends UnicastRemoteObject implements IGroup, MessageListene
      *{@inheritDoc}
      */
     @Override
-    public Vector<ISlackLikeUser> getSubscribers() throws RemoteException {
+    public Vector<ISlackLikeUser> getSubscribers() {
         return subscribers;
     }
 
@@ -86,7 +86,7 @@ public class Group extends UnicastRemoteObject implements IGroup, MessageListene
 
     @Override
     public void onMessage(Message message) {
-        Session pubSession = null;
+        Session pubSession;
         try {
             pubSession = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
             Session finalPubSession = pubSession;

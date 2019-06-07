@@ -9,7 +9,7 @@ import java.rmi.server.UnicastRemoteObject;
 public class SlackLikeUser extends UnicastRemoteObject implements ISlackLikeUser {
 
 
-    private String username;
+    private final String username;
 
     public SlackLikeUser(String username) throws RemoteException {
         this.username = username;
