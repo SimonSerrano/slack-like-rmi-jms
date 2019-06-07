@@ -2,6 +2,9 @@ package model;
 
 import client.interfaces.IGroup;
 import client.interfaces.ISlackLikeUser;
+import org.apache.activemq.ActiveMQConnectionFactory;
+
+import javax.jms.*;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Vector;
@@ -9,20 +12,30 @@ import java.util.Vector;
 /**
  * Represent the implementation of a group containing subscribers, which are SlackLikeUser, and the group has a name
  */
-public class Group extends UnicastRemoteObject implements IGroup {
+public class Group extends UnicastRemoteObject implements IGroup, MessageListener {
 
     private String name;
     private Vector<ISlackLikeUser> subscribers;
+    private Connection connection;
 
+    private final long MESSAGE_LIFESPAN = 180000;
 
     /**
      * Constructor of a group with a name
      * @param name the name of the group
      * @throws RemoteException if an exception occurs
      */
-    public Group(String name) throws RemoteException {
+    public Group(String name) throws RemoteException, JMSException {
         this.name = name;
         this.subscribers = new Vector<>();
+        ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://localhost:61616");
+        connection = connectionFactory.createConnection();
+        connection.setClientID(this.name);
+        connection.start();
+        Session subSession = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+        Topic topic = subSession.createTopic(this.name);
+        MessageConsumer consumer = subSession.createDurableSubscriber(topic, this.name);
+        consumer.setMessageListener(this);
     }
 
     /**
@@ -71,5 +84,26 @@ public class Group extends UnicastRemoteObject implements IGroup {
     }
 
 
+    @Override
+    public void onMessage(Message message) {
+        Session pubSession = null;
+        try {
+            pubSession = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+            Session finalPubSession = pubSession;
+            subscribers.forEach((user -> {
+                try {
+                    Topic topic = finalPubSession.createTopic(name + user.getName());
+                    MessageProducer producer = finalPubSession.createProducer(topic);
+                    producer.send(message, DeliveryMode.PERSISTENT, Message.DEFAULT_PRIORITY, MESSAGE_LIFESPAN);
 
+                } catch (RemoteException | JMSException e) {
+                    e.printStackTrace();
+                }
+            }));
+            finalPubSession.close();
+        } catch (JMSException e) {
+            e.printStackTrace();
+        }
+
+    }
 }

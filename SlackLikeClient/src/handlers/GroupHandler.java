@@ -149,9 +149,6 @@ public class GroupHandler {
     }
 
     private void subscribe(IGroup group) throws RemoteException, JMSException {
-        Topic topic = subSession.createTopic(group.getName());
-        MessageConsumer consumer = subSession.createDurableSubscriber(topic, user.getName());
-        consumer.setMessageListener(new GroupListener());
         group.subscribe(user);
         System.out.println("Successfully subscribed user " + user.getName() + " to " + group.getName());
     }
@@ -159,7 +156,7 @@ public class GroupHandler {
 
     private void listen(IGroup group) throws JMSException, RemoteException {
         if(group.getSubscribers().contains(user)) {
-            Topic topic = subSession.createTopic(group.getName());
+            Topic topic = subSession.createTopic(group.getName()+user.getName());
             MessageConsumer consumer = subSession.createDurableSubscriber(topic, user.getName());
             consumer.setMessageListener(new GroupListener());
             connection.start();
