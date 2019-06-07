@@ -49,6 +49,9 @@ You can also load the project in an IDE and start it from there, but the SLF4J l
 embedded maven of the IDE (usually eclipse or intelliJ).
 
 
+## TESTS
+
+There are no tests in the project at the moment
  
 ## USAGE
 
