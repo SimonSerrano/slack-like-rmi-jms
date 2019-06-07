@@ -183,7 +183,7 @@ class GroupHandler {
             consumer = subSession.createDurableSubscriber(topic, user.getName());
             consumer.setMessageListener(new GroupListener());
             connection.start();
-            System.out.println("Now listening to" + group.getName());
+            System.out.println("Now listening to " + group.getName());
         }else {
             System.out.println("You need to be subscribed to a group in order to listen to it");
         }

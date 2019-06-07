@@ -16,8 +16,12 @@ Careful, it is not a Maven Project.
  
 ## DEPENDENCIES
 
-  * [JMS](https://docs.oracle.com/javaee/7/api/javax/jms/package-summary.html)
-  * [ActiveMQ](https://activemq.apache.org/using-activemq)
+### Server
+  * [ActiveMQ Core](https://mvnrepository.com/artifact/org.apache.activemq/activemq-core)
+  * [ActiveMQ Broker](https://mvnrepository.com/artifact/org.apache.activemq/activemq-broker)
+  
+### Client
+  * [ActiveMQ Core](https://mvnrepository.com/artifact/org.apache.activemq/activemq-core)
 
   
 ## ARCHITECTURE
