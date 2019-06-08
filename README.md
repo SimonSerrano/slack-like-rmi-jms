@@ -12,7 +12,6 @@ Slack like console application in Java RMI and JMS. Main features are :
   * Group listening (being able to see the messages in a group)
   * Sending messages to a group
   
-Careful, it is not a Maven Project.
  
 ## DEPENDENCIES
 
